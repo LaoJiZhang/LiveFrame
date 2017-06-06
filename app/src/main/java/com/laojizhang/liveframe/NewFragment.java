@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.laojizhang.lifelibrary.ui.BaseLifeFragment;
+import com.laojizhang.lifelibrary.ui.fragment.BaseLifeFragment;
 import com.laojizhang.lifelibrary.utils.LogUtils;
 import com.laojizhang.liveframe.databinding.FragmentNewLayoutBinding;
 
@@ -26,8 +26,8 @@ public class NewFragment extends BaseLifeFragment<FragmentNewLayoutBinding, NewM
     public static final String TAG = NewFragment.class.getSimpleName();
 
     @Override
-    protected UiDelegate createUiDelegate() {
-        return new UiDelegate() {
+    protected FragmentUiDelegate createUiDelegate() {
+        return new FragmentUiDelegate() {
             @Override
             public int getContentId() {
                 return R.layout.fragment_new_layout;

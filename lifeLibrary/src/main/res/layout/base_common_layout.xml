@@ -6,7 +6,7 @@
 
         <import type="android.view.View"/>
 
-        <import type="com.laojizhang.lifelibrary.ui.BaseLifeFragment"/>
+        <import type="com.laojizhang.lifelibrary.ui.fragment.BaseLifeFragment"/>
 
         <variable
             name="currentFlag"

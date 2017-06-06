@@ -16,24 +16,43 @@
 
 package com.laojizhang.liveframe;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import android.arch.lifecycle.LifecycleActivity;
+import com.laojizhang.lifelibrary.ui.activity.BaseLifeActivity;
+import com.laojizhang.liveframe.databinding.ActivityMainBinding;
 
-public class MainActivity extends LifecycleActivity {
+public class MainActivity extends BaseLifeActivity<ActivityMainBinding, CommonModel> {
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected ActivityUiDelegate createActivityUiDelegate() {
+        return new ActivityUiDelegate() {
+            @Override
+            public void initActivity(Bundle savedInstanceState, ActivityMainBinding binding) {
+                NewFragment fragment = new NewFragment();
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment, NewFragment.TAG).commit();
+            }
 
-        // Add product list fragment if this is first creation
-        if (savedInstanceState == null) {
-            NewFragment fragment = new NewFragment();
+            @Override
+            public int getContentId() {
+                return R.layout.activity_main;
+            }
 
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, fragment, NewFragment.TAG).commit();
-        }
+            @Override
+            public Class<CommonModel> getClazz() {
+                return CommonModel.class;
+            }
+        };
     }
 
+    @Override
+    protected Observer<?> createDefaultObserver() {
+        return new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+
+            }
+        };
+    }
 }

@@ -31,7 +31,6 @@ public class NewModel extends BaseLifeModel<String> {
             getHandler().postDelayed(this, 1000);
         }
     };
-    private MutableLiveData<List<Integer>> mListLiveData;
 
     public NewModel(Application application) {
         super(application);
@@ -40,7 +39,7 @@ public class NewModel extends BaseLifeModel<String> {
         mIntegers.add(3);
         mIntegers.add(4);
         mIntegers.add(5);
-        getHandler().postDelayed(mCountDownRunnable, 5000);
+        getHandler().postDelayed(mCountDownRunnable, 2000);
     }
 
     @Override

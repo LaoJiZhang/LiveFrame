@@ -1,4 +1,4 @@
-package com.laojizhang.lifelibrary.ui;
+package com.laojizhang.lifelibrary.ui.fragment;
 
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.laojizhang.lifelibrary.model.BaseLifeModel;
+import com.laojizhang.lifelibrary.ui.IUiDelegate;
 import com.laojizhang.lifelibrary.utils.LogUtils;
 
 /**
@@ -30,7 +31,7 @@ public abstract class BaseLifeFragment<D extends ViewDataBinding, M extends Base
 
     private D mContentBinding;
     private MutableLiveData<M> mBaseModelLiveData;
-    private MutableLiveData<UiDelegate> mUiDelegateLiveData;
+    private MutableLiveData<FragmentUiDelegate> mUiDelegateLiveData;
 
     public D getContentBinding() {
         return mContentBinding;
@@ -39,8 +40,9 @@ public abstract class BaseLifeFragment<D extends ViewDataBinding, M extends Base
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mUiDelegateLiveData = new MutableLiveData<UiDelegate>();
+        mUiDelegateLiveData = new MutableLiveData<FragmentUiDelegate>();
         mUiDelegateLiveData.setValue(createUiDelegate());
+
         mBaseModelLiveData = new MutableLiveData<>();
         mBaseModelLiveData.setValue(createModel(mUiDelegateLiveData.getValue().getClazz()));
         subscribeUi(getDefaultLiveData(), createDefaultObserver());
@@ -135,16 +137,12 @@ public abstract class BaseLifeFragment<D extends ViewDataBinding, M extends Base
         return mBaseModelLiveData.getValue().getLiveData();
     }
 
-    protected abstract UiDelegate createUiDelegate();
+    protected abstract FragmentUiDelegate createUiDelegate();
 
     protected abstract Observer<?> createDefaultObserver();
 
-    public abstract class UiDelegate {
-
-        public abstract int getContentId();
+    public abstract class FragmentUiDelegate implements IUiDelegate<M> {
 
         public abstract void initFragment(D binding);
-
-        public abstract Class<M> getClazz();
     }
 }

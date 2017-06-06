@@ -1,28 +1,23 @@
 package com.laojizhang.lifelibrary.ui;
 
-import android.view.View;
+import android.support.annotation.IntDef;
 
 /**
- * 文件名称： IPageView
+ * 文件名称： IPageShowView
  * 作   者： guomaojian
  * 创建日期： 2017/06/06-15:54
  * 文件描述：
  * <p>
  */
 
-interface IPageView {
+public interface IPageView {
 
-    void showLoadingPage();
+    int FALG_LOADING = 1;
+    int FALG_EMPTY = 2;
+    int FALG_ERROR = 3;
+    int FALG_CONTENT = 4;
 
-    View createOwnLoadingView();
-
-    void showEmptyPage();
-
-    View createOwnEmptyView();
-
-    void showErrorPage();
-
-    View createOwnErrorView();
-
-    void showContentView();
+    @IntDef({FALG_LOADING, FALG_EMPTY, FALG_ERROR, FALG_CONTENT})
+    public @interface ViewFlag {
+    }
 }
