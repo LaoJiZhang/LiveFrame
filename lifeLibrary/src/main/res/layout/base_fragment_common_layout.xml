@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <import type="com.laojizhang.lifelibrary.ui.BaseLifeFragment"/>
+
+        <variable
+            name="currentFlag"
+            type="int"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/view_loading"
+            layout="@layout/base_loading_layout"
+            android:visibility="@{currentFlag == BaseLifeFragment.FALG_LOADING ? View.VISIBLE : View.GONE ,default = gone}"/>
+
+        <include
+            android:id="@+id/view_empty"
+            layout="@layout/base_empty_layout"
+            android:visibility="@{currentFlag == BaseLifeFragment.FALG_EMPTY ? View.VISIBLE : View.GONE , default = gone}"/>
+
+        <include
+            android:id="@+id/view_error"
+            layout="@layout/base_error_layout"
+            android:visibility="@{currentFlag == BaseLifeFragment.FALG_ERROR ? View.VISIBLE : View.GONE , default = gone}"/>
+
+        <FrameLayout
+            android:id="@+id/view_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{currentFlag == BaseLifeFragment.FALG_CONTENT ? View.VISIBLE : View.GONE}"/>
+    </FrameLayout>
+</layout>
