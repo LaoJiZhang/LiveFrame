@@ -1,5 +1,6 @@
 package com.laojizhang.lifelibrary.ui.activity;
 
+import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -45,7 +46,7 @@ public abstract class BaseLifeActivity<D extends ViewDataBinding, M extends Base
     }
 
     @Override
-    public View createContentView(Bundle savedInstanceState, LayoutInflater inflater, @Nullable ViewGroup container) {
+    protected View createContentView(Bundle savedInstanceState, LayoutInflater inflater, @Nullable ViewGroup container) {
         initUIDelegate();
         initModel();
         return initContentView(savedInstanceState, inflater, container);
@@ -60,6 +61,7 @@ public abstract class BaseLifeActivity<D extends ViewDataBinding, M extends Base
         mModelMutableLiveData = new MutableLiveData<>();
         M model = ViewModelProviders.of(this).get(getActivityUiDelegate().getClazz());
         mModelMutableLiveData.setValue(model);
+        model.init(getPageView());
     }
 
     private View initContentView(Bundle savedInstanceState, LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -120,6 +122,10 @@ public abstract class BaseLifeActivity<D extends ViewDataBinding, M extends Base
         if (getModel() != null) {
             getModel().onDestroy();
         }
+    }
+
+    public Activity getActivity() {
+        return this;
     }
 
     protected abstract ActivityUiDelegate createActivityUiDelegate();

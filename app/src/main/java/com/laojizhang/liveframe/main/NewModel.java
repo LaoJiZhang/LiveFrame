@@ -1,4 +1,4 @@
-package com.laojizhang.liveframe;
+package com.laojizhang.liveframe.main;
 
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
@@ -49,6 +49,10 @@ public class NewModel extends BaseLifeModel<String> {
             mIntegers.set(i, mIntegers.get(i) + 1);
         }
         LogUtils.i("AAA", "STOP : " + mIntegers.toString());
+    }
+
+    @Override
+    protected void onFinishInit() {
     }
 
     public MutableLiveData<ArrayList<Integer>> bindListData() {

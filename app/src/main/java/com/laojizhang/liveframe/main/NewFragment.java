@@ -1,4 +1,4 @@
-package com.laojizhang.liveframe;
+package com.laojizhang.liveframe.main;
 
 import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.laojizhang.lifelibrary.ui.fragment.BaseLifeFragment;
 import com.laojizhang.lifelibrary.utils.LogUtils;
+import com.laojizhang.liveframe.R;
+import com.laojizhang.liveframe.base.BaseFragment;
 import com.laojizhang.liveframe.databinding.FragmentNewLayoutBinding;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
  * <p>
  */
 
-public class NewFragment extends BaseLifeFragment<FragmentNewLayoutBinding, NewModel> {
+public class NewFragment extends BaseFragment<FragmentNewLayoutBinding, NewModel> {
 
     public static final String TAG = NewFragment.class.getSimpleName();
 
@@ -98,5 +99,15 @@ public class NewFragment extends BaseLifeFragment<FragmentNewLayoutBinding, NewM
         textView.setText("NewError");
         textView.setGravity(Gravity.CENTER);
         return textView;
+    }
+
+    @Override
+    public View.OnClickListener createNetErrBtnClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "aaa", Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 }

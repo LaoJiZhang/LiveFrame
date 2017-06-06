@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LiveFrame</string>
+
+    <string name="network_error_tip1">网络似乎有点不给力啊</string>
+    <string name="network_error_tip2">请检查网络或重新加载</string>
+    <string name="refresh_retry">再试一次</string>
 </resources>

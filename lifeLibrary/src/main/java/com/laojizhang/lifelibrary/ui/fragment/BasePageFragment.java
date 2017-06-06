@@ -3,6 +3,7 @@ package com.laojizhang.lifelibrary.ui.fragment;
 import android.arch.lifecycle.LifecycleFragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,16 +26,25 @@ public abstract class BasePageFragment extends LifecycleFragment implements IPag
 
     private PageViewImpl mPageView;
 
+    public PageViewImpl getPageView() {
+        return mPageView;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         BaseCommonLayoutBinding commonLayoutBinding = DataBindingUtil.inflate(inflater, R.layout.base_common_layout, container, false);
 
-        mPageView = new PageViewImpl(this, commonLayoutBinding);
+        mPageView = new PageViewImpl(createPageCreateView(), commonLayoutBinding);
 
         commonLayoutBinding.setCurrentFlag(mPageView.getCurrentViewFlag());
         commonLayoutBinding.viewContent.addView(createContentView(inflater, container));
         return commonLayoutBinding.getRoot();
+    }
+
+    @NonNull
+    protected IPageCreateView createPageCreateView() {
+        return this;
     }
 
     public void showLoadingPage() {

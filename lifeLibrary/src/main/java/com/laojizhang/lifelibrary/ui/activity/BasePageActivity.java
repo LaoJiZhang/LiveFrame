@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +28,17 @@ public abstract class BasePageActivity extends LifecycleActivity implements IPag
 
     private PageViewImpl mPageView;
 
+    public PageViewImpl getPageView() {
+        return mPageView;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         BaseCommonLayoutBinding mCommonLayoutBinding = DataBindingUtil.inflate(inflater, R.layout.base_common_layout, null, false);
 
-        mPageView = new PageViewImpl(this, mCommonLayoutBinding);
+        mPageView = new PageViewImpl(createPageCreateView(), mCommonLayoutBinding);
 
         mCommonLayoutBinding.setCurrentFlag(mPageView.getCurrentViewFlag());
         mCommonLayoutBinding.viewContent.addView(createContentView(savedInstanceState, inflater, null));
@@ -41,9 +46,10 @@ public abstract class BasePageActivity extends LifecycleActivity implements IPag
         subscribeUi(getDefaultLiveData(), createDefaultObserver());
     }
 
-    protected abstract MutableLiveData getDefaultLiveData();
-
-    protected abstract Observer<?> createDefaultObserver();
+    @NonNull
+    protected IPageCreateView createPageCreateView() {
+        return this;
+    }
 
     protected void subscribeUi(MutableLiveData liveData, Observer<?> observer) {
         liveData.observe(this, observer);
@@ -80,5 +86,9 @@ public abstract class BasePageActivity extends LifecycleActivity implements IPag
         return null;
     }
 
-    public abstract View createContentView(Bundle savedInstanceState, LayoutInflater inflater, @Nullable ViewGroup container);
+    protected abstract MutableLiveData getDefaultLiveData();
+
+    protected abstract Observer<?> createDefaultObserver();
+
+    protected abstract View createContentView(Bundle savedInstanceState, LayoutInflater inflater, @Nullable ViewGroup container);
 }

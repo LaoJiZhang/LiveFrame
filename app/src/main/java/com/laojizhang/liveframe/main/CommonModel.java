@@ -1,4 +1,4 @@
-package com.laojizhang.liveframe;
+package com.laojizhang.liveframe.main;
 
 import android.app.Application;
 
@@ -16,5 +16,9 @@ public class CommonModel extends BaseLifeModel<String> {
 
     public CommonModel(Application application) {
         super(application);
+    }
+
+    @Override
+    protected void onFinishInit() {
     }
 }

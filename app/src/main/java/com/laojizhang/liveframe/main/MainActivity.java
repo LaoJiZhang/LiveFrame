@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-package com.laojizhang.liveframe;
+package com.laojizhang.liveframe.main;
 
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.laojizhang.lifelibrary.ui.activity.BaseLifeActivity;
+import com.laojizhang.liveframe.R;
 import com.laojizhang.liveframe.databinding.ActivityMainBinding;
+import com.laojizhang.liveframe.movie.ui.MovieActivity;
 
 public class MainActivity extends BaseLifeActivity<ActivityMainBinding, CommonModel> {
 
@@ -32,6 +36,12 @@ public class MainActivity extends BaseLifeActivity<ActivityMainBinding, CommonMo
             public void initActivity(Bundle savedInstanceState, ActivityMainBinding binding) {
                 NewFragment fragment = new NewFragment();
                 getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment, NewFragment.TAG).commit();
+                binding.next.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MainActivity.this.startActivity(new Intent(MainActivity.this, MovieActivity.class));
+                    }
+                });
             }
 
             @Override

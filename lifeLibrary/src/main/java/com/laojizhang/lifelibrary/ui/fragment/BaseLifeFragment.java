@@ -40,12 +40,20 @@ public abstract class BaseLifeFragment<D extends ViewDataBinding, M extends Base
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        initUiDelegate();
+        initModel();
+        subscribeUi(getDefaultLiveData(), createDefaultObserver());
+    }
+
+    private void initUiDelegate() {
         mUiDelegateLiveData = new MutableLiveData<FragmentUiDelegate>();
         mUiDelegateLiveData.setValue(createUiDelegate());
+    }
 
+    private void initModel() {
         mBaseModelLiveData = new MutableLiveData<>();
         mBaseModelLiveData.setValue(createModel(mUiDelegateLiveData.getValue().getClazz()));
-        subscribeUi(getDefaultLiveData(), createDefaultObserver());
+        getModel().init(getPageView());
     }
 
     @Override

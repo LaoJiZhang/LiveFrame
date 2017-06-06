@@ -6,6 +6,9 @@ import android.arch.lifecycle.MutableLiveData;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.laojizhang.lifelibrary.ui.PageViewImpl;
+import com.laojizhang.lifelibrary.utils.LogUtils;
+
 /**
  * 文件名称： BaseLifeModel
  * 作   者： guomaojian
@@ -16,11 +19,17 @@ import android.os.Handler;
 
 public abstract class BaseLifeModel<D extends Object> extends AndroidViewModel {
 
+    public static final String TAG = BaseLifeModel.class.getSimpleName();
     private MutableLiveData<D> mLiveData;
     private MutableLiveData<Handler> mHandlerLiveData;
+    private MutableLiveData<PageViewImpl> mPageViewMutableLiveData;
 
     public MutableLiveData<D> getLiveData() {
         return mLiveData;
+    }
+
+    public PageViewImpl getPageViewImpl() {
+        return mPageViewMutableLiveData.getValue();
     }
 
     protected Handler getHandler() {
@@ -61,8 +70,25 @@ public abstract class BaseLifeModel<D extends Object> extends AndroidViewModel {
         return mLiveData;
     }
 
+    public void setDefaultLiveData(D data) {
+        mLiveData.setValue(data);
+    }
+
     public <T> MutableLiveData<T> bindLiveData(T t) {
         MutableLiveData<T> liveData = new MutableLiveData<T>();
         return liveData;
     }
+
+    public void init(PageViewImpl pageView) {
+        LogUtils.i(TAG, "init model");
+        mPageViewMutableLiveData = new MutableLiveData<>();
+        mPageViewMutableLiveData.setValue(pageView);
+        onFinishInit();
+    }
+
+    public boolean isAttachView() {
+        return mPageViewMutableLiveData != null && mPageViewMutableLiveData.getValue() != null;
+    }
+
+    protected abstract void onFinishInit();
 }
