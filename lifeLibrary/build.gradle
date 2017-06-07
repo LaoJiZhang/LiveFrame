@@ -33,6 +33,7 @@ dependencies {
 
     compile "com.android.support:appcompat-v7:$supportLibVersion"
     compile "com.android.support:support-annotations:$supportLibVersion"
+    compile "com.android.support:design:$supportLibVersion"
 
 //    For Lifecycles, LiveData, and ViewModel, add:
     compile "android.arch.lifecycle:runtime:$archLifecycleVersion"

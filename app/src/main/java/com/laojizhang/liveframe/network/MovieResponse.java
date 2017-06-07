@@ -3,7 +3,11 @@ package com.laojizhang.liveframe.network;
 import java.io.Serializable;
 
 /**
- * Created by guomaojian on 16/10/12.
+ * 文件名称： MovieResponse
+ * 作   者： guomaojian
+ * 创建日期： 2017/05/27-11:55
+ * 文件描述：
+ * <p>
  */
 
 public class MovieResponse implements Serializable {

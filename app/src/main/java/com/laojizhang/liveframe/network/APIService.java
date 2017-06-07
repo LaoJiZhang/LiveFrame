@@ -11,9 +11,12 @@ import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**
- * Created by guomaojian on 16/10/12.
+ * 文件名称： APIService
+ * 作   者： guomaojian
+ * 创建日期： 2017/05/27-11:51
+ * 文件描述：
+ * <p>
  */
-
 public interface APIService {
 
     @GET("movie/index")

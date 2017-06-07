@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.text.TextUtils"/>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="movie"
+            type="com.laojizhang.liveframe.movie.bean.MovieEntity"/>
+    </data>
+
+    <LinearLayout
+        android:id="@+id/movie_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/movie_item_press_up">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/movie_item_pic_iv"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:actualImageScaleType="centerCrop"
+                app:placeholderImageScaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/movie_item_pic_iv"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="4dp"
+                    android:maxLines="2"
+                    android:text="@{movie.title}"
+                    android:textColor="@color/black1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="8dp"
+                    android:text='@{"年代："+movie.year}'
+                    android:textColor="@color/black2"
+                    android:textSize="11sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/movie_item_type1_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_movie_item_teacher"
+                        android:gravity="center"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:textColor="@color/black1"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:id="@+id/movie_item_type2_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5.5dp"
+                        android:background="@drawable/bg_movie_item_teacher"
+                        android:gravity="center"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:textColor="@color/black1"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:id="@+id/movie_item_type3_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5.5dp"
+                        android:background="@drawable/bg_movie_item_teacher"
+                        android:gravity="center"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:textColor="@color/black1"
+                        android:textSize="11sp"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/movie_item_press_down"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text='@{"评分："+movie.rating.average+"   星星数："+movie.rating.stars}'
+                android:textColor="@color/black2"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:text='@{movie.directors.get(0).getName()}'
+                android:textColor="@color/black1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="visible"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by guomaojian on 16/11/16.
+ * 文件名称： RequestParamsFactory
+ * 作   者： guomaojian
+ * 创建日期： 2017/05/27-11:53
+ * 文件描述：
+ * <p>
  */
 
 public class RequestParamsFactory {

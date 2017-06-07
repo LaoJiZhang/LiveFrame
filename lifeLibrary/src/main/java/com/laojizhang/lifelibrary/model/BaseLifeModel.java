@@ -32,7 +32,7 @@ public abstract class BaseLifeModel<D extends Object> extends AndroidViewModel {
         return mPageViewMutableLiveData.getValue();
     }
 
-    protected Handler getHandler() {
+    public Handler getHandler() {
         return mHandlerLiveData.getValue();
     }
 

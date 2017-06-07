@@ -3,7 +3,11 @@ package com.laojizhang.liveframe.network;
 import java.io.Serializable;
 
 /**
- * Created by guomaojian on 16/11/16.
+ * 文件名称： DouBanResponse
+ * 作   者： guomaojian
+ * 创建日期： 2017/05/27-11:54
+ * 文件描述：
+ * <p>
  */
 
 public class DouBanResponse<D extends Object> implements Serializable {

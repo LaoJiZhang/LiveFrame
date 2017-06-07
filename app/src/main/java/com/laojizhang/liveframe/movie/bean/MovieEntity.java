@@ -3,7 +3,11 @@ package com.laojizhang.liveframe.movie.bean;
 import java.util.List;
 
 /**
- * Created by guomaojian on 16/11/16.
+ * 文件名称： MovieEntity
+ * 作   者： guomaojian
+ * 创建日期： 2017/05/27-11:52
+ * 文件描述：
+ * <p>
  */
 
 public class MovieEntity {
