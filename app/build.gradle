@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "$buildToolsVersion"
+    buildToolsVersion "${build_tools_version}"
+
     defaultConfig {
         applicationId "com.laojizhang.liveframe"
         minSdkVersion 16

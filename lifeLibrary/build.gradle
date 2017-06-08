@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "${build_tools_version}"
 
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 100
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -20,6 +20,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    libraryVariants.all { variant ->
+        if (variant.buildType.name == 'release') {
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith('release.aar')) {
+                    def fileName = "com.laojizhang.life:library:${android.defaultConfig.versionName}@aar.aar"
+                    def outputPath = outputFile.parentFile.absolutePath + File.separator
+                    output.outputFile = new File(outputPath, fileName)
+                }
+            }
+        }
+    }
+
     dataBinding {
         enabled = true
     }
@@ -31,20 +45,20 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile "com.android.support:appcompat-v7:$supportLibVersion"
-    compile "com.android.support:support-annotations:$supportLibVersion"
-    compile "com.android.support:design:$supportLibVersion"
+    compile "com.android.support:appcompat-v7:${support_lib_version}"
+    compile "com.android.support:support-annotations:${support_lib_version}"
+    compile "com.android.support:design:${support_lib_version}"
 
 //    For Lifecycles, LiveData, and ViewModel, add:
-    compile "android.arch.lifecycle:runtime:$archLifecycleVersion"
-    compile "android.arch.lifecycle:extensions:$archLifecycleVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$archLifecycleVersion"
+    compile "android.arch.lifecycle:runtime:${arch_lifecycle_version}"
+    compile "android.arch.lifecycle:extensions:${arch_lifecycle_version}"
+    annotationProcessor "android.arch.lifecycle:compiler:${arch_lifecycle_version}"
 //    For Room, add:
-    compile "android.arch.persistence.room:runtime:$archRoomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$archRoomVersion"
+    compile "android.arch.persistence.room:runtime:${arch_room_version}"
+    annotationProcessor "android.arch.persistence.room:compiler:${arch_room_version}"
 //    For testing Room migrations, add:
-    testCompile "android.arch.persistence.room:testing:$archRoomVersion"
+    testCompile "android.arch.persistence.room:testing:${arch_room_version}"
 //    For Room RxJava support, add:
-    compile "android.arch.persistence.room:rxjava2:$archRoomVersion"
+    compile "android.arch.persistence.room:rxjava2:${arch_room_version}"
     testCompile 'junit:junit:4.12'
 }

@@ -2,6 +2,9 @@ package com.laojizhang.lifelibrary.ui;
 
 import android.support.annotation.IntDef;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * 文件名称： IPageShowView
  * 作   者： guomaojian
@@ -17,6 +20,7 @@ public interface IPageView {
     int FALG_ERROR = 3;
     int FALG_CONTENT = 4;
 
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({FALG_LOADING, FALG_EMPTY, FALG_ERROR, FALG_CONTENT})
     public @interface ViewFlag {
     }
