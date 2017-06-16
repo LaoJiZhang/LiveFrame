@@ -5,6 +5,8 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.laojizhang.lifelibrary.model.BaseLifeModel;
 import com.laojizhang.lifelibrary.utils.LogUtils;
+import com.laojizhang.liveframe.base.LiveApplication;
+import com.laojizhang.liveframe.db.table.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,27 @@ public class NewModel extends BaseLifeModel<String> {
 
     @Override
     protected void onFinishInit() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                User user = new User();
+                user.setNick_name("nick_name" + Math.random());
+                user.setLast_name("last_name" + Math.random());
+                LiveApplication.getDatabase().userDao().addUser(user);
+
+                List<User> users = LiveApplication.getDatabase().userDao().listUsers();
+                if (users != null) {
+                    for (final User it : users) {
+                        getHandler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                LogUtils.i(TAG, it.toString());
+                            }
+                        });
+                    }
+                }
+            }
+        }).start();
     }
 
     public MutableLiveData<ArrayList<Integer>> bindListData() {

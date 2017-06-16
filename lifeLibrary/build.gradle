@@ -53,11 +53,7 @@ dependencies {
     compile "android.arch.lifecycle:runtime:${arch_lifecycle_version}"
     compile "android.arch.lifecycle:extensions:${arch_lifecycle_version}"
     annotationProcessor "android.arch.lifecycle:compiler:${arch_lifecycle_version}"
-//    For Room, add:
-    compile "android.arch.persistence.room:runtime:${arch_room_version}"
-    annotationProcessor "android.arch.persistence.room:compiler:${arch_room_version}"
-//    For testing Room migrations, add:
-    testCompile "android.arch.persistence.room:testing:${arch_room_version}"
+
 //    For Room RxJava support, add:
     compile "android.arch.persistence.room:rxjava2:${arch_room_version}"
     testCompile 'junit:junit:4.12'
